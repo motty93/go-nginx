@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  proxy:
+    build: ./docker/nginx
+    ports:
+      - '11080:11080'
+    volumes:
+      - ./docker/nginx/nginx.conf:/etx/nginx/nginx.conf
+  app:
+    build: .
+    ports:
+      - '8080:8080'
+    volumes:
+      - .:/app
+    depends_on:
+      - proxy
